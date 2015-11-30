@@ -121,6 +121,7 @@
     // Extension API interactions
     var potentialDevices = [];
     ext._deviceConnected = function (dev) {
+        console.log('_deviceconnected called ' + dev);
         potentialDevices.push(dev);
 
         if (!device) {
@@ -181,18 +182,21 @@
     }
 
     ext._deviceRemoved = function (dev) {
+        console.log('_deviceremoved called');
         if (device != dev) return;
         if (poller) poller = clearInterval(poller);
         device = null;
     };
 
     ext._shutdown = function () {
+        console.log('_shutdown called');
         if (device) device.close();
         if (poller) poller = clearInterval(poller);
         device = null;
     };
 
     ext._getStatus = function () {
+        console.log('_getStatus called');
         if (!device) return {status: 1, msg: 'PicoBoard disconnected'};
         if (watchdog) return {status: 1, msg: 'Probing for PicoBoard'};
         return {status: 2, msg: 'PicoBoard connected'};
