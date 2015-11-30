@@ -126,5 +126,5 @@
             sensor: ['A', 'B'],
         },
     };
-    ScratchExtensions.register('PicoBoard', descriptor, ext, {type: 'serial'});
+    ScratchExtensions.register('Serial1', descriptor, ext, {type: 'serial'});
 })({});
