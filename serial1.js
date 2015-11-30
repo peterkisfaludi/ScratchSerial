@@ -20,18 +20,21 @@
 
     // Reporters
     ext.sensor = function (which) {
+        console.log('ext.sensor called');
         return getSensor(which);
     };
 
     // Private logic
 
     function getSensor(which) {
+        console.log('get sensor called with ' + which);
         return inputs[which];
     }
 
     var inputArray = [];
 
     function processData() {
+        console.log('processing data');
         var bytes = new Uint8Array(rawData);
 
         inputArray[15] = 0;
@@ -55,6 +58,7 @@
     }
 
     function appendBuffer(buffer1, buffer2) {
+        console.log('append buffer called');
         var tmp = new Uint8Array(buffer1.byteLength + buffer2.byteLength);
         tmp.set(new Uint8Array(buffer1), 0);
         tmp.set(new Uint8Array(buffer2), buffer1.byteLength);
@@ -64,7 +68,7 @@
     // Extension API interactions
     var potentialDevices = [];
     ext._deviceConnected = function (dev) {
-        console.log('Device connected: %s', device);
+        console.log('_deviceConnected called' + dev);
         potentialDevices.push(dev);
 
         if (!device) {
