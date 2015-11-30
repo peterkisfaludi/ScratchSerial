@@ -120,14 +120,10 @@
 
     var descriptor = {
         blocks: [
-            ['h', 'when %m.booleanSensor',         'whenSensorConnected', 'button pressed'],
-            ['b', 'sensor %m.booleanSensor?',      'sensorPressed',       'button pressed'],
-            ['r', '%m.sensor sensor value',        'sensor',              'slider']
+            ['r', '%m.sensor sensor value',        'sensor',              'A']
         ],
         menus: {
-            booleanSensor: ['A', 'B'],
             sensor: ['A', 'B'],
-            lessMore: ['>', '<']
         },
     };
     ScratchExtensions.register('PicoBoard', descriptor, ext, {type: 'serial'});
