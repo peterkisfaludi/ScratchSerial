@@ -14,8 +14,8 @@
         B: 1,
     };
     var inputs = {
-        A: 0,
-        B: 0,
+        A: 100,
+        B: 200,
     };
 
     // Reporters
