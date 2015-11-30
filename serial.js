@@ -4,7 +4,7 @@
     
     var inputArray = [];
     
-    ext.sensor = function {
+    ext.sensor = function() {
         console.log('Device opened');
     };
     
