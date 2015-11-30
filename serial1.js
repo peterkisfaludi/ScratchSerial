@@ -20,7 +20,7 @@
 
     // Reporters
     ext.sensor = function (which) {
-        console.log('ext.sensor called');
+        console.log('ext.sensor called with ' + which);
         return getSensor(which);
     };
 
@@ -80,6 +80,7 @@
         // If potentialDevices is empty, device will be undefined.
         // That will get us back here next time a device is connected.
         device = potentialDevices.shift();
+        console.log('tryNext called, device is ' + device);
 
         if (device) {
             console.log('serial port opened');
@@ -88,7 +89,7 @@
     }
 
     function deviceOpened(dev) {
-        console.log('DeviceOpened'+dev);
+        console.log('DeviceOpened' + dev);
         if (!dev) {
             // Opening the port failed.
             tryNextDevice();
@@ -110,6 +111,7 @@
     }
 
     ext._deviceRemoved = function (dev) {
+        console.log('_deviceRemoved');
         if (device != dev) return;
         device = null;
     };
@@ -120,7 +122,12 @@
     };
 
     ext._getStatus = function () {
-        if (!device) return {status: 1, msg: 'PicoBoard disconnected'};
+        console.log('getStatus called');
+        if (!device) {
+            console.log('status = 1');
+            return {status: 1, msg: 'PicoBoard disconnected'};
+        }
+        console.log('status = 2');
         return {status: 2, msg: 'PicoBoard connected'};
     };
 
