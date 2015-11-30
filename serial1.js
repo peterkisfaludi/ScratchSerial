@@ -64,6 +64,7 @@
     // Extension API interactions
     var potentialDevices = [];
     ext._deviceConnected = function (dev) {
+        console.log('Device connected: %s', device);
         potentialDevices.push(dev);
 
         if (!device) {
@@ -77,12 +78,13 @@
         device = potentialDevices.shift();
 
         if (device) {
-            console.log('Device opened: ');
+            console.log('serial port opened');
             device.open({stopBits: 0, bitRate: 115200, ctsFlowControl: 0}, deviceOpened);
         }
     }
 
     function deviceOpened(dev) {
+        console.log('DeviceOpened'+dev);
         if (!dev) {
             // Opening the port failed.
             tryNextDevice();
