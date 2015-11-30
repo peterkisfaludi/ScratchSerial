@@ -4,6 +4,10 @@
     
     var inputArray = [];
     
+    ext.sensor = function {
+        console.log('Device opened');
+    };
+    
     function processData() {
         var bytes = new Uint8Array(rawData);
         inputArray[10] = 0;
