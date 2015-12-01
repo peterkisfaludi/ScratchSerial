@@ -4,6 +4,8 @@
 //
 // This is an extension for development and testing of the Scratch Javascript Extension API.
 
+
+
 (function (ext) {
     var device = null;
     var rawData = null;
