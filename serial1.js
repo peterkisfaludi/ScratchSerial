@@ -4,7 +4,18 @@
 //
 // This is an extension for development and testing of the Scratch Javascript Extension API.
 
-
+(function(context) {
+    chrome.runtime.onMessageExternal.addListener(
+    function(request, sender, sendResponse) {
+      if (request.serialMessage) {
+        console.log("from "+sender.id+": "+request.serialMessage);
+        sendResponse({"result":"Ok, got your message"});
+      } else {
+        sendResponse({"result":"Ops, I don't understand this message"});
+      }
+    });
+    
+})(window)
 
 (function (ext) {
     var device = null;
