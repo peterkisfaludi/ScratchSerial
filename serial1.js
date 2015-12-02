@@ -5,6 +5,10 @@
 // This is an extension for development and testing of the Scratch Javascript Extension API.
 
 ////////////////////////////////////////////
+//scratch extension
+(function (ext) {
+
+////////////////////////////////////////////
 //WebSocket client
 console.log('hello from scratchx extension');
 if ('WebSocket' in window){
@@ -23,10 +27,11 @@ ws.onmessage = function(e){
    console.log(server_message);
    ext.onserial(server_message);
 };
+//////////////////////////////////
 
-////////////////////////////////////////////
-//scratch extension
-(function (ext) {
+
+
+
     var device = null;
     var serialReceived = false;
 
