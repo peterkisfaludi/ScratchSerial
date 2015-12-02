@@ -21,7 +21,7 @@ ws.onopen = function() {
 ws.onmessage = function(e){
    var server_message = e.data;
    console.log(server_message);
-}
+};
 
 //scratch extension
 (function (ext) {
