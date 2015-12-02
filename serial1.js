@@ -8,21 +8,20 @@
 //WebSocket client
 console.log('hello from scratchx extension');
 if ('WebSocket' in window){
-    console.log('websockets are supported');
+    console.log('websockets are supported, go ahead');
 } else {
-    console.log('bad news');
+    console.log('bad news, websockets are not supported');
 }
 
 var ws = new WebSocket("ws://localhost:9999/");
 ws.onopen = function() {
-    function schedule(i) {
-        setTimeout(function() { 
-          ws.send('Hello from the scratchx client! (iteration ' + i + ')');
-          schedule(i + 1);
-        }, 1000);            
-    };
-    schedule(1);            
+    console.log('web socket client opened');
 };
+
+ws.onmessage = function(e){
+   var server_message = e.data;
+   console.log(server_message);
+}
 
 //scratch extension
 (function (ext) {
