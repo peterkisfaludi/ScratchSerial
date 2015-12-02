@@ -5,14 +5,26 @@
 // This is an extension for development and testing of the Scratch Javascript Extension API.
 
 
-console.log('hello scratch extension');
+//WebSocket client
+console.log('hello from scratchx extension');
 if ('WebSocket' in window){
     console.log('websockets are supported');
 } else {
     console.log('bad news');
 }
 
+var ws = new WebSocket("ws://localhost:9999/");
+ws.onopen = function() {
+    function schedule(i) {
+        setTimeout(function() { 
+          ws.send('Hello from the scratchx client! (iteration ' + i + ')');
+          schedule(i + 1);
+        }, 1000);            
+    };
+    schedule(1);            
+};
 
+//scratch extension
 (function (ext) {
     var device = null;
     var rawData = null;
