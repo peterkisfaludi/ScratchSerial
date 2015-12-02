@@ -5,7 +5,13 @@
 // This is an extension for development and testing of the Scratch Javascript Extension API.
 
 
-console.log('hello javascript');
+console.log('hello scratch extension');
+if ('WebSocket' in window){
+    console.log('websockets are supported');
+} else {
+    console.log('bad news');
+}
+
 
 (function (ext) {
     var device = null;
