@@ -61,7 +61,7 @@
     ext.when_serial_received = function() {
        // Reset serialReceived if it is true, and return true
        // otherwise, return false.
-       if (serialReceived == true) {
+       if (serialReceived === true) {
            serialReceived = false;
            return true;
        }
@@ -77,7 +77,7 @@
         //message format:
         //99X####Y####
         
-        if(raw[0]!=9 || raw[1]!=9 || raw[2]!=X || raw[7]!=Y || str.length!=12){
+        if(!(raw.substr(0,2)==="99" && raw[2]==="X" && raw[7]==="Y" && str.length===12)){
             console.log('invalid package');
             return;
         }
