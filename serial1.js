@@ -102,7 +102,7 @@
     var descriptor = {
         blocks: [
             ['r', '%m.sensor value',        'sensor',              'X'],
-            ['h', 'Serial Received',        'when_serial_received'    ],
+            ['h', 'When Serial Received',        'when_serial_received'    ],
         ],
         menus: {
             sensor: ['X', 'Y'],
