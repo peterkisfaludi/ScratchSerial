@@ -31,11 +31,6 @@
     var device = null;
     var serialReceived = false;
 
-    // Sensor states:
-    var channels = {
-        A: 0,
-        B: 1,
-    };
     var inputs = {
         A: 111,
         B: 555,
@@ -75,9 +70,9 @@
         //TODO timeout for SR->clear flag after 1 sec
         //TODO parse array
         //message format:
-        //99X####Y####
+        //99X####Y####\n
         
-        if(!(raw.substr(0,2)==="99" && raw[2]==="X" && raw[7]==="Y" && raw.length===12)){
+        if(!(raw.substr(0,2)==="99" && raw[2]==="X" && raw[7]==="Y" && raw.length===13)){
             console.log('invalid package');
             return;
         }
