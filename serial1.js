@@ -66,6 +66,7 @@
     
     ext.onserial = function (raw) {
         console.log('extension received: '+raw);
+        console.log(raw.length);
         serialReceived = true;
         //TODO timeout for SR->clear flag after 1 sec
         //TODO parse array
@@ -87,6 +88,8 @@
         
         console.log('X= ' + x + 'Y= ' + y);
         
+        inputs['A'] = X;
+        inputs['B'] = Y;
         
     }
 
