@@ -77,7 +77,7 @@
         //message format:
         //99X####Y####
         
-        if(!(raw.substr(0,2)==="99" && raw[2]==="X" && raw[7]==="Y" && str.length===12)){
+        if(!(raw.substr(0,2)==="99" && raw[2]==="X" && raw[7]==="Y" && raw.length===12)){
             console.log('invalid package');
             return;
         }
@@ -86,7 +86,7 @@
         var y=parseInt(raw.substr(8,4));
         
         if(isNaN(x) || isNaN(y) || x<0 || y<0){
-            console.log('invalid package');
+            console.log('invalid values');
             return;
         }
         
