@@ -32,8 +32,8 @@
     var serialReceived = false;
 
     var inputs = {
-        A: 111,
-        B: 555,
+        X: 0,
+        Y: 0,
     };
 
     // Reporters
@@ -66,12 +66,12 @@
     
     ext.onserial = function (raw) {
         console.log('extension received: '+raw);
-        console.log(raw.length);
         serialReceived = true;
         //TODO timeout for SR->clear flag after 1 sec
         //TODO parse array
         //message format:
         //99X####Y####\n
+        //message length: 12 + newline
         
         if(!(raw.substr(0,2)==="99" && raw[2]==="X" && raw[7]==="Y" && raw.length===13)){
             console.log('invalid package');
@@ -86,10 +86,10 @@
             return;
         }
         
-        console.log('X= ' + x + 'Y= ' + y);
+        console.log('X= ' + x + ' Y= ' + y);
         
-        inputs['A'] = X;
-        inputs['B'] = Y;
+        inputs['X'] = x;
+        inputs['Y'] = y;
         
     }
 
@@ -101,12 +101,12 @@
 
     var descriptor = {
         blocks: [
-            ['r', '%m.sensor value',        'sensor',              'A'],
+            ['r', '%m.sensor value',        'sensor',              'X'],
             ['h', 'Serial Received',        'when_serial_received'    ],
         ],
         menus: {
-            sensor: ['A', 'B'],
+            sensor: ['X', 'Y'],
         },
     };
-    ScratchExtensions.register('Serial1', descriptor, ext);
+    ScratchExtensions.register('ScratchXSerial', descriptor, ext);
 })({});
