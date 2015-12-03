@@ -58,6 +58,17 @@
         return inputs[which];
     }
     
+    ext.when_serial_received = function() {
+       // Reset serialReceived if it is true, and return true
+       // otherwise, return false.
+       if (serialReceived == true) {
+           serialReceived = false;
+           return true;
+       }
+
+       return false;
+    };
+    
     ext.onserial = function (raw) {
         console.log('extension received: '+raw);
         serialReceived = true;
@@ -92,8 +103,8 @@
 
     var descriptor = {
         blocks: [
-            ['r', '%m.sensor value',        'sensor',              'A']
-//            ['r', 'Serial Received',        'SR',                     ]
+            ['r', '%m.sensor value',        'sensor',              'A'],
+            ['h', 'Serial Received',        'when_serial_received'    ],
         ],
         menus: {
             sensor: ['A', 'B'],
