@@ -1,36 +1,32 @@
-// picoExtension.js
-// Shane M. Clements, February 2014
-// PicoBoard Scratch Extension
+// serial.js
+// Peter Kisfaludi
+// Serial Scratch Extension
 //
-// This is an extension for development and testing of the Scratch Javascript Extension API.
 
-////////////////////////////////////////////
-//scratch extension
 (function (ext) {
 
-////////////////////////////////////////////
-//WebSocket client
-console.log('hello from scratchx extension');
-if ('WebSocket' in window){
-    console.log('websockets are supported, go ahead');
-} else {
-    console.log('bad news, websockets are not supported');
-}
+    ////////////////////////////////////////////
+    //WebSocket client
+    console.log('hello from scratchx extension');
+    if ('WebSocket' in window){
+        console.log('websockets are supported, go ahead');
+    } else {
+        console.log('bad news, websockets are not supported');
+    }
 
-var ws = new WebSocket("ws://localhost:9999/");
-ws.onopen = function() {
-    console.log('web socket client opened');
-};
+    //open websocket
+    var ws = new WebSocket("ws://localhost:9999/");
+    ws.onopen = function() {
+        console.log('web socket client opened');
+    };
 
-ws.onmessage = function(e){
-   var server_message = e.data;
-   console.log(server_message);
-   ext.onserial(server_message);
-};
-//////////////////////////////////
-
-
-
+    ws.onmessage = function(e){
+       var server_message = e.data;
+       console.log(server_message);
+       // send message to scratchX extension
+       ext.onserial(server_message);
+    };
+    // End websockets ////////////////////////////////
 
     var device = null;
     var serialReceived = false;
@@ -41,8 +37,8 @@ ws.onmessage = function(e){
         B: 1,
     };
     var inputs = {
-        A: 500,
-        B: 600,
+        A: 111,
+        B: 555,
     };
 
     // Reporters
@@ -64,9 +60,29 @@ ws.onmessage = function(e){
     
     ext.onserial = function (raw) {
         console.log('extension received: '+raw);
+        serialReceived = true;
+        //TODO timeout for SR->clear flag after 1 sec
+        //TODO parse array
+        //message format:
+        //99X####Y####
+        
+        if(raw[0]!=9 || raw[1]!=9 || raw[2]!=X || raw[7]!=Y || str.length!=12){
+            console.log('invalid package');
+            return;
+        }
+        
+        var x=parseInt(raw.substr(3,4));
+        var y=parseInt(raw.substr(8,4));
+        
+        if(isNaN(x) || isNaN(y) || x<0 || y<0){
+            console.log('invalid package');
+            return;
+        }
+        
+        console.log('X= ' + x + 'Y= ' + y');
+        
+        
     }
-
-    var inputArray = [];
 
     ext._shutdown = function () {};
 
